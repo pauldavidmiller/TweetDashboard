@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TweetPolitics": {
+    "TweetDashboard": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/TweetPolitics",
+            "outputPath": "dist/TweetDashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "TweetPolitics:build"
+            "browserTarget": "TweetDashboard:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "TweetPolitics:build:production"
+              "browserTarget": "TweetDashboard:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TweetPolitics:build"
+            "browserTarget": "TweetDashboard:build"
           }
         },
         "test": {
@@ -110,15 +110,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "TweetPolitics:serve"
+            "devServerTarget": "TweetDashboard:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "TweetPolitics:serve:production"
+              "devServerTarget": "TweetDashboard:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "TweetPolitics"
+    }
+  },
+  "defaultProject": "TweetDashboard",
+  "cli": {
+    "analytics": "4e2b9720-0179-4b4b-a1c8-24084452b6dd"
+  }
 }
