@@ -3,24 +3,24 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PoliticiansComponent } from './politicians/politicians.component';
-import { PoliticianComponent } from './politician/politician.component';
-import { PoliticiansService } from './politicians/politicians.service';
-import { PoliticianService } from './politician/politician.service';
+import { UserListComponent } from './userlist/userlist.component';
+import { UserComponent } from './user/user.component';
+import { UserListService } from './userlist/userlist.service';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PoliticiansComponent,
-    PoliticianComponent
+    UserListComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
   providers: [
-    PoliticianService,
-    PoliticiansService
+    UserService,
+    UserListService
   ],
   bootstrap: [AppComponent]
 })
