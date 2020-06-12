@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthRoutingModule } from '../auth-routing.module';
 import { AuthModule } from '../auth.module';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +19,10 @@ export class LoginComponent implements OnInit {
   onSubmit(f: NgForm){
     console.log(f.value);
     console.log(f.valid);
+  }
+
+  goToPage(page: string){
+    this.router.navigateByUrl(page)
   }
 
 }
