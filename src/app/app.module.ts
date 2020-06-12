@@ -7,6 +7,7 @@ import { UserListComponent } from './userlist/userlist.component';
 import { UserComponent } from './user/user.component';
 import { UserListService } from './userlist/userlist.service';
 import { UserService } from './user/user.service';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserService } from './user/user.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthRoutingModule
   ],
   providers: [
     UserService,
