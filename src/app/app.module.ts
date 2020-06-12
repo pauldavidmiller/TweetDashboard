@@ -8,6 +8,9 @@ import { UserComponent } from './user/user.component';
 import { UserListService } from './userlist/userlist.service';
 import { UserService } from './user/user.service';
 import { AuthRoutingModule } from './auth/auth-routing.module';
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [
     UserService,
