@@ -16,6 +16,8 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit(f: NgForm){
     console.log(f.value);
     console.log(f.valid);
+
+    // Send email to user and update database
   }
 
 }

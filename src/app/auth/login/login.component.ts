@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   onSubmit(f: NgForm){
     console.log(f.value);
     console.log(f.valid);
+
+    // Check credentials with database
   }
 
   goToPage(page: string){

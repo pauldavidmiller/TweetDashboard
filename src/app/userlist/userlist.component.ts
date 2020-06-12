@@ -21,6 +21,8 @@ export class UserListComponent implements OnInit {
   }
 
   addUser(newUser: string){
+    // Add twitter-user's timeline to client's database
+
     if (newUser) {
       this.users.push(newUser);
     }
@@ -28,6 +30,8 @@ export class UserListComponent implements OnInit {
   }
 
   removeUser(User: string) {
+    // Remove twitter-user's timeline to client's database
+
     if (User){
       // Get index of user
       let index = this.users.indexOf(User)
