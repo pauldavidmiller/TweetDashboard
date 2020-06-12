@@ -24,13 +24,17 @@ export class UserListComponent implements OnInit {
     if (newUser) {
       this.users.push(newUser);
     }
+    console.log(this.users)
   }
 
   removeUser(User: string) {
     if (User){
       // Get index of user
       let index = this.users.indexOf(User)
-      this.users.splice(index)
+      this.users.splice(index, 1)
+      console.log(User)
+      console.log(index)
+      console.log(this.users)
     }
   }
 
