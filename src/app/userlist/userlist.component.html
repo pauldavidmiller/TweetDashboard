@@ -1,0 +1,17 @@
+<h2>{{ title }}</h2>
+<input #newUser
+  (keyup.enter)="addUser(newUser.value)"
+  (blur)="addUser(newUser.value); newUser.value='' ">
+<button (click)="addUser(newUser.value)">Add</button>
+<ol class="ol" >
+    <!-- <app-user class="li" *ngFor="let user of users" [user]="user">
+       <button (click)="removeUser(user)">x</button>
+    </app-user> -->
+    <li class="li" *ngFor="let user of users">
+      <button (click)="removeUser(user)">x</button>
+      <app-user [user]="user">
+
+      </app-user>
+    </li>
+</ol>
+
