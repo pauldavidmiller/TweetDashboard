@@ -11,6 +11,8 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { ClientService } from './client.service';
 
 @NgModule({
   declarations: [
@@ -23,11 +25,13 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     AuthRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
   providers: [
     UserService,
-    UserListService
+    UserListService,
+    ClientService
   ],
   bootstrap: [AppComponent]
 })
