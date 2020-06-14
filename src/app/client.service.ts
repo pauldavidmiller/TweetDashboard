@@ -55,6 +55,8 @@ export class ClientService {
       var credential = error.credential;
     });
 
+
+    // TODO: Update user info here with this code
       //let info = firebase.database().ref('/clients/' + this.uid).push({email: this.email});
       //console.log(info);
 
