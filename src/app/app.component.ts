@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { AngularFireDatabase } from "angularfire2/database";
 import { ClientService } from './client.service';
 import { Router } from '@angular/router';
 
