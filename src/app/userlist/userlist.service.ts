@@ -54,9 +54,9 @@ export class UserListService {
             console.log("updateUsers: " + uid);
 
             // Update user list in database
-            users.forEach(element => {
+            //users.forEach(element => {
                 firebase.database().ref('clients/' + uid + '/users/').set(users);
-            });
+            //});
 
 
         } catch (e) {
