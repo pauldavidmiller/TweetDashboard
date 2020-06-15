@@ -41,8 +41,4 @@ export class UserListComponent implements OnInit {
       console.log(this.users)
     }
   }
-
-  getUsers() {
-    return this.users;
-  }
 }

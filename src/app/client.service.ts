@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf, Observable } from 'rxjs';
+//import { of as observableOf, Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { map } from "rxjs/operators";
 import { auth } from "firebase";
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestoreCollectionGroup } from "angularfire2/firestore";
+//import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestoreCollectionGroup } from "angularfire2/firestore";
 import * as firebase from 'firebase';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class ClientService {
   clientEmail: string;
 
   constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
-    let n = this.db.list('clients').valueChanges();
+    //let n = this.db.list('clients').valueChanges();
   }
 
   login() {
