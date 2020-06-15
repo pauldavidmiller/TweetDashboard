@@ -13,7 +13,7 @@ export class UserListComponent implements OnInit {
   title = "User List Component";
   users;
 
-  constructor(service: UserListService) { 
+  constructor(public service: UserListService) { 
     this.users = service.getUsers();
   }
 
@@ -21,17 +21,21 @@ export class UserListComponent implements OnInit {
   }
 
   addUser(newUser: string){
-    // Add twitter-user's timeline to client's database
 
+    // Update list
     if (newUser) {
       this.users.push(newUser);
     }
+
+    // Update database
+    this.service.updateUsers(this.users);
+
     console.log(this.users)
   }
 
   removeUser(User: string) {
-    // Remove twitter-user's timeline to client's database
 
+    // Update list
     if (User){
       // Get index of user
       let index = this.users.indexOf(User)
@@ -40,5 +44,8 @@ export class UserListComponent implements OnInit {
       console.log(index)
       console.log(this.users)
     }
+
+    // Update database
+    this.service.updateUsers(this.users);
   }
 }

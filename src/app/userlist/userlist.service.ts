@@ -45,5 +45,8 @@ export class UserListService {
         }
     }
 
-    
+    // TODO: update the users per account in the database
+    updateUsers(users: any){
+
+    } 
 }
