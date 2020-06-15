@@ -23,7 +23,7 @@ export class UserListService {
         // Try catch block to check uid is logged in - if no login give clean slate for playground
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("UserlistService: " + uid);
+            console.log("getUsers: " + uid);
 
             var list: Array<string> = [];
             var ref = firebase.database().ref().child('/clients/' + uid + '/users/').orderByChild('users');
@@ -48,5 +48,19 @@ export class UserListService {
     // TODO: update the users per account in the database
     updateUsers(users: any){
 
+        // Try catch block to check uid is logged in
+        try {
+            let uid = this.auth.auth.currentUser.uid;
+            console.log("updateUsers: " + uid);
+
+            // Update user list in database
+            users.forEach(element => {
+                firebase.database().ref('clients/' + uid + '/users/').set(users);
+            });
+
+
+        } catch (e) {
+            console.log(e);
+        }
     } 
 }
