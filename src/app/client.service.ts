@@ -34,16 +34,31 @@ export class ClientService {
 
 
   database = firebase.database();
-  email;
+  clientEmail: string;
 
-  constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) { }
+  constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
+    let n = this.db.list('clients').valueChanges();
+  }
 
   login() {
     let login = this.auth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(function (result) {
       // The signed-in user info.
-      var user = result.user;
-      this.email = user.email;
+      let user = result.user;
       console.log(user.email);
+      console.log(user.uid);
+
+      var postData = {
+        email: user.email
+      };
+
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      //var newPostKey = firebase.database().ref().child('clients').push().key;
+      //var updates = {};
+      //updates['/clients/' + user.uid + '/'] = postData;
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
 
     }).catch(function (error) {
       // Handle Errors here.
@@ -55,10 +70,6 @@ export class ClientService {
       var credential = error.credential;
     });
 
-
-    // TODO: Update user info here with this code
-      //let info = firebase.database().ref('/clients/' + this.uid).push({email: this.email});
-      //console.log(info);
 
     //this.auth.auth.signInWithEmailAndPassword()
   }
