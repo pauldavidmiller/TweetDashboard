@@ -27,8 +27,8 @@ export class UserListService {
 
             var list: Array<string> = [];
             var ref = firebase.database().ref().child('/clients/' + uid + '/users/').orderByChild('users');
-            ref.once('value', function(snap) {
-                snap.forEach(function(item) {
+            ref.once('value', function (snap) {
+                snap.forEach(function (item) {
                     var itemVal = item.val();
                     list.push(itemVal);
                     console.log(itemVal);
@@ -46,7 +46,7 @@ export class UserListService {
     }
 
     // TODO: update the users per account in the database
-    updateUsers(users: any){
+    updateUsers(users: any) {
 
         // Try catch block to check uid is logged in
         try {
@@ -54,13 +54,11 @@ export class UserListService {
             console.log("updateUsers: " + uid);
 
             // Update user list in database
-            //users.forEach(element => {
-                firebase.database().ref('clients/' + uid + '/users/').set(users);
-            //});
+            firebase.database().ref('clients/' + uid + '/users/').set(users);
 
 
         } catch (e) {
             console.log(e);
         }
-    } 
+    }
 }
