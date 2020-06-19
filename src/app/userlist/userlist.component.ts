@@ -10,7 +10,7 @@ import { UserComponent } from '../user/user.component';
 })
 export class UserListComponent implements OnInit {
 
-  title = "User List Component";
+  title = "Add Twitter Timelines and Build Your Dashboard!";
   users;
 
   constructor(public service: UserListService) { 

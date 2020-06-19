@@ -1,17 +1,17 @@
-<h2>{{ title }}</h2>
-<input #newUser
-  (keyup.enter)="addUser(newUser.value)"
-  (blur)="addUser(newUser.value); newUser.value='' ">
-<button (click)="addUser(newUser.value)">Add</button>
-<ol class="ol" >
-    <!-- <app-user class="li" *ngFor="let user of users" [user]="user">
-       <button (click)="removeUser(user)">x</button>
-    </app-user> -->
-    <li class="li" *ngFor="let user of users">
-      <button (click)="removeUser(user)">x</button>
+<div class="w3-padding-large">
+  <h4>{{ title }}</h4>
+  <div class="input-group">
+    <h4>@</h4>
+    <input #newUser placeholder="ZacEfron" (keyup.enter)="addUser(newUser.value)" (blur)="addUser(newUser.value); newUser.value='' ">
+    <button class="btn btn-primary" (click)="addUser(newUser.value)">Add</button>
+  </div>
+</div>
+<ol class="ol">
+  <li class="li" *ngFor="let user of users">
+    <div class="w3-border w3-round-xlarge w3-pale-blue w3-padding-small">
+      <button class="close" (click)="removeUser(user)">X</button>
       <app-user [user]="user">
-
       </app-user>
-    </li>
+    </div>
+  </li>
 </ol>
-
