@@ -1,7 +1,10 @@
 <div class="row">
   <div class="col-md-6 offset-md-3 mt-4">
     <h3>Login</h3>
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+    <!-- Email and Password Sign In -->
+
+    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)">
 
       <p>Form value: {{ f.value | json }}</p>
       <p>Form valid: {{ f.valid }}</p>
@@ -29,7 +32,16 @@
         <a [routerLink]="['/reset-password']">Forgot Password</a>
       </div>
       <button type="submit" [disabled]="f.invalid" (click)="goToPage('userlist')" class="btn btn-primary">Login</button>
-    </form>
+    </form> -->
+
+    <div *ngIf="client.uid | async as uid">
+      Client is logged in. {{ uid }}
+      <div *ngIf="client.isAdmin | async">The user also has ADMIN power</div>
+      <div><button (click)="client.logout()">Logout</button></div>
+    </div>
+    <div>
+      You need to login: <button type="submit" (click)="client.login()" class="btn btn-primary">Google Login</button>
+    </div>
   </div>
 </div>
 
