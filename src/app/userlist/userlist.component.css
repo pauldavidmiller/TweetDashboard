@@ -11,6 +11,7 @@
 .li {
     text-align: center;
     width: "*";
+    height: "400px";
     float: left;
-    margin: 2.5%;
+    margin: 1.5%;
 }
