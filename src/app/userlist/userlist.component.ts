@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserListService } from './userlist.service';
 import { UserService } from '../user/user.service';
 import { UserComponent } from '../user/user.component';
@@ -19,6 +19,8 @@ export class UserListComponent implements OnInit {
     this.users = service.getUsers();
     // Get Groups from Database
     this.groups = service.getGroups();
+    // Switch to "All" group initially
+    this.changeGroup("All");
   }
 
   ngOnInit(): void {
@@ -82,10 +84,13 @@ export class UserListComponent implements OnInit {
     this.service.updateGroups(this.groups);
   }
 
+
   changeGroup(Group: string){
     // Change display of group
     if (Group){
+      // Change border color
       
+      // Change timelines
     }
   }
 }
