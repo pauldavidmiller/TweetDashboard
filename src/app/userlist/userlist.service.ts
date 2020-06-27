@@ -45,7 +45,16 @@ export class UserListService {
         }
     }
 
-    // TODO: update the users per account in the database
+    getGroups() {
+        // Get groups from database under the user signed in
+        try {
+            return ["All", "Politicians"];
+        } catch (e) {
+            return ["All"];
+        }
+    }
+
+    // Update the users per account in the database
     updateUsers(users: any) {
 
         // Try catch block to check uid is logged in
@@ -57,6 +66,19 @@ export class UserListService {
             firebase.database().ref('clients/' + uid + '/users/').set(users);
 
 
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // TODO: Update the groups per account in the database
+    updateGroups(groups: any) {
+        // Try catch block to check uid is logged in
+        try {
+            let uid = this.auth.auth.currentUser.uid;
+            console.log("updateUsers: " + uid);
+
+            // Update group list in database
         } catch (e) {
             console.log(e);
         }
