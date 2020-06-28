@@ -18,9 +18,12 @@
 
   <div class="column">
     <ol class="ol">
-      <li class="li" *ngFor="let group of groups">
-        <button class="w3-border w3-round-xlarge w3-pale-blue w3-padding-small" (click)="changeGroup(group)">
-          <div class="row">
+      <li class="li w3-padding-small w3-border" *ngFor="let group of groups">
+
+          <div class="row w3-padding-small">
+            <div class="column w3-padding-small">
+              <input #newCheckbox type="checkbox" class="w3-border w3-pale-blue w3-padding-small" (change)="newCheckbox.selected = !newCheckbox.selected" (click)="changeGroup(newCheckbox.checked, group)"/>
+            </div>
             <div class="column w3-padding-small">
               <p style="font-weight: bold;">{{ group }}</p>
             </div>
@@ -28,7 +31,6 @@
               <button class="close" (click)="removeGroup(group)">X</button>
             </div>
           </div>
-        </button>
       </li>
     </ol>
   </div>
