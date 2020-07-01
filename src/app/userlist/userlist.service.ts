@@ -15,7 +15,7 @@ export class UserListService {
     database = firebase.database();
 
     constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
-        //let n = this.db.list('clients').valueChanges();
+        let n = this.db.list('clients').valueChanges().subscribe(); //This subscribes to items in the database
     }
 
     getUsers(Group: string) {
@@ -23,20 +23,16 @@ export class UserListService {
         // Try catch block to check uid is logged in - if no login give clean slate for playground
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("getUsers: " + uid);
 
             // Do fetch of data
             var list: Array<string> = [];
-            var ref = firebase.database().ref().child('/clients/' + uid + '/groups/' + Group);
+            var ref = firebase.database().ref().child('/clients/' + uid + '/groups/' + Group.toString()).orderByChild(Group.toString());
             ref.once('value', function (snap) {
                 snap.forEach(function (item) {
                     var itemVal = item.val();
                     list.push(itemVal);
                 });
             });
-
-            console.log("list");
-            console.log(list);
 
             return list;
 
@@ -52,7 +48,6 @@ export class UserListService {
         // Try catch block to check uid is logged in - if no login give clean slate for playground
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("getGroups: " + uid);
 
             var list: Array<string> = [];
             var ref = firebase.database().ref('/clients/' + uid + '/groups/').orderByChild('groups');
@@ -62,8 +57,6 @@ export class UserListService {
                     list.push(itemVal);
                 });
             });
-
-            console.log("getGroups List: " + list);
 
             return list;
 
@@ -81,7 +74,6 @@ export class UserListService {
         // Try catch block to check uid is logged in
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("updateUsers: " + uid);
 
             // Update user list in database
             firebase.database().ref('clients/' + uid + '/groups/' + Group).set(users);
@@ -97,7 +89,6 @@ export class UserListService {
         // Try catch block to check uid is logged in
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("updateUsers: " + uid);
 
             // Update group list in database
         } catch (e) {

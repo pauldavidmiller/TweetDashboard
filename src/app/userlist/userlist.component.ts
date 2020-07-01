@@ -11,8 +11,8 @@ import { UserComponent } from '../user/user.component';
 export class UserListComponent implements OnInit {
 
   title = "Add Twitter Timelines and Build Your Dashboard!";
-  users;
-  groups;
+  users; //users to be displayed from the selected groups
+  groups; //all listed groups
   selectedGroups: Array<string> = []; // all selected groups - only one can be selected to have users added
 
   constructor(public service: UserListService) {
@@ -89,14 +89,13 @@ export class UserListComponent implements OnInit {
 
   changeGroup(selected: boolean, Group: string) {
     // Check which groups are selected and are in the group list
-    if (selected) {
+    if (selected && !this.selectedGroups.includes(Group)) {
       // Add groups to list if selected
       this.selectedGroups.push(Group);
-    } else {
+    } else if (!selected && this.selectedGroups.includes(Group)){
       // Remove groups from list if deselected
       var index = this.selectedGroups.indexOf(Group);
       console.log("index of selected false: " + index);
-      this.selectedGroups.splice(index, )
       this.selectedGroups.splice(index, 1);
     }
 
@@ -106,25 +105,13 @@ export class UserListComponent implements OnInit {
       const group = this.selectedGroups[i];
       var groupUsers = this.service.getUsers(group.toString());
 
-      console.log("groupUsers");
-      console.log(groupUsers);
-
-      var arr = ["first", "second"];
-      console.log(arr);
-
-      // TODO: FIX THIS - PROTOARRAY?????
 
       for (let j = 0; j < groupUsers.length; j++) {
         const user = groupUsers[j];
-        console.log("user");
-        console.log(user);
         allUsers.push(user.toString());
       }
     }
 
     this.users = allUsers;
-  
-
-    //console.log("selected groups: " + this.selectedGroups);
   }
 }
