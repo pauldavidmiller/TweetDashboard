@@ -109,7 +109,10 @@ export class UserListComponent implements OnInit {
       console.log("groupUsers");
       console.log(groupUsers);
 
-      // TODO: FIX THIS
+      var arr = ["first", "second"];
+      console.log(arr);
+
+      // TODO: FIX THIS - PROTOARRAY?????
 
       for (let j = 0; j < groupUsers.length; j++) {
         const user = groupUsers[j];

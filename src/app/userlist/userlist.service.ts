@@ -35,6 +35,9 @@ export class UserListService {
                 });
             });
 
+            console.log("list");
+            console.log(list);
+
             return list;
 
         } catch (e) {
