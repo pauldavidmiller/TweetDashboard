@@ -34,8 +34,6 @@ export class UserListComponent implements OnInit {
 
     // Update database
     this.service.updateUsers(this.users, this.selectedGroups[0]);
-
-    console.log(this.users)
   }
 
   // removeUser removes the user from the userlist of the ONE selected group from selectedGroups
