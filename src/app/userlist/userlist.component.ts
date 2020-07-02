@@ -10,24 +10,21 @@ import { UserComponent } from '../user/user.component';
 })
 export class UserListComponent implements OnInit {
 
+  // Global variables to be accessed by page
   title = "Add Twitter Timelines and Build Your Dashboard!";
   users; //users to be displayed from the selected groups
   groups; //all listed groups
   selectedGroups: Array<string> = []; // all selected groups - only one can be selected to have users added
 
   constructor(public service: UserListService) {
-    //var groupToGetTEMP = "Friends";
-    // Get Users from Database
-    //this.users = service.getUsers(groupToGetTEMP);
-    // Get Groups from Database
+    // Get Groups initially from Database
     this.groups = service.getGroups();
-    // Start with all groups selected initially
-    // this.changeGroup(groupToGetTEMP);
   }
 
   ngOnInit(): void {
   }
 
+  // addUser adds the user input to the userlist of the ONE selected group from selectedGroups
   addUser(newUser: string) {
 
     // Update list
@@ -41,6 +38,7 @@ export class UserListComponent implements OnInit {
     console.log(this.users)
   }
 
+  // removeUser removes the user from the userlist of the ONE selected group from selectedGroups
   removeUser(User: string) {
 
     // Update list
@@ -48,9 +46,6 @@ export class UserListComponent implements OnInit {
       // Get index of user
       let index = this.users.indexOf(User);
       this.users.splice(index, 1);
-      console.log(User);
-      console.log(index);
-      console.log(this.users);
     }
 
     // Update database
@@ -58,35 +53,26 @@ export class UserListComponent implements OnInit {
   }
 
 
+  // addGroup adds the desired group to the list
   addGroup(newGroup: string) {
     // Add Group to Page and Database
     if (newGroup) {
       this.groups.push(newGroup);
     }
-
-    // Update database
-    this.service.updateGroups(this.groups);
-
-    console.log(this.groups);
-
   }
 
+  // removeGroup removes the desired group from the list
   removeGroup(Group: string) {
     // Update list
     if (Group) {
       // Get index of group
       let index = this.groups.indexOf(Group);
       this.groups.splice(index, 1);
-      console.log(Group);
-      console.log(index);
-      console.log(this.groups);
     }
-
-    // Update database
-    this.service.updateGroups(this.groups);
   }
 
 
+  // changeGroup changes the selected groups and stores it in selectedGroups, also changes users selected in those groups and stores it in users
   changeGroup(selected: boolean, Group: string) {
     // Check which groups are selected and are in the group list
     if (selected && !this.selectedGroups.includes(Group)) {
@@ -95,7 +81,6 @@ export class UserListComponent implements OnInit {
     } else if (!selected && this.selectedGroups.includes(Group)){
       // Remove groups from list if deselected
       var index = this.selectedGroups.indexOf(Group);
-      console.log("index of selected false: " + index);
       this.selectedGroups.splice(index, 1);
     }
 
@@ -104,7 +89,6 @@ export class UserListComponent implements OnInit {
     for (let i = 0; i < this.selectedGroups.length; i++) {
       const group = this.selectedGroups[i];
       var groupUsers = this.service.getUsers(group.toString());
-
 
       for (let j = 0; j < groupUsers.length; j++) {
         const user = groupUsers[j];

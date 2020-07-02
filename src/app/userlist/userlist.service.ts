@@ -18,6 +18,7 @@ export class UserListService {
         let n = this.db.list('clients').valueChanges().subscribe(); //This subscribes to items in the database
     }
 
+    // getUsers is the call to the database to get the Users of the group specified
     getUsers(Group: string) {
 
         // Try catch block to check uid is logged in - if no login give clean slate for playground
@@ -43,6 +44,7 @@ export class UserListService {
         }
     }
 
+    // getGroups is the call to the database to get the list of groups
     getGroups() {
         // Get groups from database under the user signed in
         // Try catch block to check uid is logged in - if no login give clean slate for playground
@@ -68,7 +70,7 @@ export class UserListService {
         }
     }
 
-    // Update the users per account in the database
+    // updateUsers is the call to update the users per Group in the database
     updateUsers(users: any, Group: string) {
 
         // Try catch block to check uid is logged in
@@ -79,18 +81,6 @@ export class UserListService {
             firebase.database().ref('clients/' + uid + '/groups/' + Group).set(users);
 
 
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    // TODO: Update the groups per account in the database
-    updateGroups(groups: any) {
-        // Try catch block to check uid is logged in
-        try {
-            let uid = this.auth.auth.currentUser.uid;
-
-            // Update group list in database
         } catch (e) {
             console.log(e);
         }

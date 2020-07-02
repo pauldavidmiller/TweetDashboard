@@ -41,7 +41,7 @@
 <ol class="ol">
   <li class="li" *ngFor="let user of users">
     <div class="w3-border w3-round-xlarge w3-pale-blue w3-padding-small">
-      <button class="close" (click)="removeUser(user)">X</button>
+      <button class="close" (click)="removeUser(user)" *ngIf="selectedGroups?.length == 1">X</button>
       <app-user [user]="user">
       </app-user>
     </div>
