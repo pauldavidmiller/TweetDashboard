@@ -11,7 +11,8 @@ import { UserComponent } from '../user/user.component';
 export class UserListComponent implements OnInit {
 
   // Global variables to be accessed by page
-  title = "Add Twitter Timelines and Build Your Dashboard!";
+  newGroupTitle = "Create New Grouping";
+  newUserTitle = "Add Twitter Timelines and Build Your Dashboard!";
   users; //users to be displayed from the selected groups
   groups; //all listed groups
   selectedGroups: Array<string> = []; // all selected groups - only one can be selected to have users added
