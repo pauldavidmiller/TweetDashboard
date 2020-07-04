@@ -18,6 +18,9 @@
             <div class="column w3-padding-small">
               <p style="font-weight: bold;">{{ group }}</p>
             </div>
+            <div class="column w3-padding-small" *ngIf="groupCount != null">
+              <span class="badge badge-light">{{ groupCount.get(group) }}</span>
+            </div>
             <div class="column w3-padding-small">
               <button class="close" (click)="removeGroup(group)">X</button>
             </div>

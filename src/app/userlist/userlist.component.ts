@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   users; //users to be displayed from the selected groups
   groups; //all listed groups
   selectedGroups: Array<string> = []; // all selected groups - only one can be selected to have users added
+  groupCount; //counts the number of users in a particular group
 
   constructor(public service: UserListService) {
     // Get Groups initially from Database
@@ -84,16 +85,26 @@ export class UserListComponent implements OnInit {
 
     // Change display of selected groups
     var allUsers: Array<string> = [];
+    // Map to display count on each group
+    var tempGroupCount: Map<string, number> = new Map<string, number>();
+
     for (let i = 0; i < this.selectedGroups.length; i++) {
+      // Get users from group
       const group = this.selectedGroups[i];
       var groupUsers = this.service.getUsers(group.toString());
 
+      // Add number of users by group
+      tempGroupCount.set(group.toString(), groupUsers.length);
+
+      // put each user into allUsers
       for (let j = 0; j < groupUsers.length; j++) {
         const user = groupUsers[j];
         allUsers.push(user.toString());
       }
     }
 
+    // Save users, count data to global variables
     this.users = allUsers;
+    this.groupCount = tempGroupCount;
   }
 }
