@@ -12,8 +12,6 @@ import * as firebase from 'firebase';
 })
 export class UserListService {
 
-    database = firebase.database();
-
     constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
         let n = this.db.list('clients').valueChanges().subscribe(); //This subscribes to items in the database
     }

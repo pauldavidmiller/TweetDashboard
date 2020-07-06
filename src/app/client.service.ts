@@ -6,6 +6,7 @@ import { auth } from "firebase";
 import { AngularFireDatabase } from 'angularfire2/database';
 //import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestoreCollectionGroup } from "angularfire2/firestore";
 import * as firebase from 'firebase';
+import { LoginComponent } from './auth/login/login.component';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,6 @@ export class ClientService {
 
 
   database = firebase.database();
-  clientEmail: string;
 
   constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
     //let n = this.db.list('clients').valueChanges();
@@ -76,6 +76,10 @@ export class ClientService {
 
   logout() {
     this.auth.auth.signOut();
+  }
+
+  getEmail() {
+    return this.auth.auth.currentUser.email;
   }
 
 }

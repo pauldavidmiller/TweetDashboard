@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6 offset-md-3 mt-4">
-    <h3>Login</h3>
+    <h3>Account</h3>
 
     <!-- Email and Password Sign In -->
 
@@ -35,14 +35,23 @@
     </form> -->
 
     <div *ngIf="client.uid | async as uid">
-      Client is logged in. {{ uid }}
-      <div *ngIf="client.isAdmin | async">The user also has ADMIN power</div>
-      <div><button (click)="client.logout()">Logout</button></div>
+      <!-- Client is logged in. {{ uid }} -->
+      Logged in as {{ getEmail() }}
+      <!-- <div *ngIf="client.isAdmin | async">The user also has ADMIN power</div> -->
+      <div><button (click)="client.logout()" class="btn btn-primary">Logout</button></div>
+      <div>
+        <h4>
+          Login with a different account:
+        </h4>
+      </div>
     </div>
     <div>
-      You need to login: <button type="submit" (click)="client.login()" class="btn btn-primary">Google Login</button>
+      <button type="submit" (click)="client.login()" class="btn btn-outline-dark btn-light">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Google Login</button>
     </div>
   </div>
 </div>
+
 
 <router-outlet></router-outlet>

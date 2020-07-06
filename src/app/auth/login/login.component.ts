@@ -4,6 +4,8 @@ import { AuthModule } from '../auth.module';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/client.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { ClientService } from 'src/app/client.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public client: ClientService, private router: Router) { }
+  constructor(public client: ClientService, private router: Router, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,10 @@ export class LoginComponent implements OnInit {
 
   goToPage(page: string){
     this.router.navigateByUrl(page)
+  }
+
+  getEmail() {
+    return this.auth.auth.currentUser.email;
   }
 
 }
