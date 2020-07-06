@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 //import { of as observableOf, Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { map } from "rxjs/operators";
+import { map, elementAt } from "rxjs/operators";
 import { auth } from "firebase";
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
@@ -15,23 +15,48 @@ export class UserListService {
     database = firebase.database();
 
     constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
-        //let n = this.db.list('clients').valueChanges();
+        let n = this.db.list('clients').valueChanges().subscribe(); //This subscribes to items in the database
     }
 
-    getUsers() {
+    // getUsers is the call to the database to get the Users of the group specified
+    getUsers(Group: string) {
 
         // Try catch block to check uid is logged in - if no login give clean slate for playground
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("getUsers: " + uid);
 
+            // Do fetch of data
             var list: Array<string> = [];
-            var ref = firebase.database().ref().child('/clients/' + uid + '/users/').orderByChild('users');
+            var ref = firebase.database().ref().child('/clients/' + uid + '/groups/' + Group.toString()).orderByChild(Group.toString());
             ref.once('value', function (snap) {
                 snap.forEach(function (item) {
                     var itemVal = item.val();
                     list.push(itemVal);
-                    console.log(itemVal);
+                });
+            });
+
+            return list;
+
+        } catch (e) {
+            console.log(e);
+
+            return ["Twitter"];
+        }
+    }
+
+    // getGroups is the call to the database to get the list of groups
+    getGroups() {
+        // Get groups from database under the user signed in
+        // Try catch block to check uid is logged in - if no login give clean slate for playground
+        try {
+            let uid = this.auth.auth.currentUser.uid;
+
+            var list: Array<string> = [];
+            var ref = firebase.database().ref('/clients/' + uid + '/groups/').orderByChild('groups');
+            ref.once('value', function (snap) {
+                snap.forEach(function (item) {
+                    var itemVal = item.key;
+                    list.push(itemVal);
                 });
             });
 
@@ -41,20 +66,19 @@ export class UserListService {
         } catch (e) {
             console.log(e);
 
-            return ["Twitter"];
+            return ["All"];
         }
     }
 
-    // TODO: update the users per account in the database
-    updateUsers(users: any) {
+    // updateUsers is the call to update the users per Group in the database
+    updateUsers(users: any, Group: string) {
 
         // Try catch block to check uid is logged in
         try {
             let uid = this.auth.auth.currentUser.uid;
-            console.log("updateUsers: " + uid);
 
             // Update user list in database
-            firebase.database().ref('clients/' + uid + '/users/').set(users);
+            firebase.database().ref('clients/' + uid + '/groups/' + Group).set(users);
 
 
         } catch (e) {

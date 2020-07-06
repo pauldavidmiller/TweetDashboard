@@ -1,15 +1,55 @@
-<div class="w3-padding-large">
-  <h4>{{ title }}</h4>
-  <div class="input-group">
-    <h4>@</h4>
-    <input #newUser placeholder="ZacEfron" (keyup.enter)="addUser(newUser.value)" (blur)="addUser(newUser.value); newUser.value='' ">
-    <button class="btn btn-primary" (click)="addUser(newUser.value)">Add</button>
+<div class="row">
+
+  <div style="text-align: right;" class="column w3-padding-large">
+    <h4>{{ newGroupTitle }}</h4>
+    <div class="input-group">
+      <h4>@</h4>
+      <input #newGroup placeholder="Politicians" (keyup.enter)="addGroup(newGroup.value)"
+        (blur)="addGroup(newGroup.value); newGroup.value='' ">
+      <button class="btn btn-primary" (click)="addGroup(newGroup.value)">Add</button>
+    </div>
   </div>
+
+  <div class="column">
+    <ol class="ol">
+      <li class="li w3-padding-small border border-dark rounded-pill bg-info" *ngFor="let group of groups">
+
+        <div class="row w3-padding-small">
+          <div class="column w3-padding-small">
+            <input #newCheckbox type="checkbox" class="w3-border w3-pale-blue w3-padding-small"
+              (change)="newCheckbox.selected = !newCheckbox.selected"
+              (click)="changeGroup(newCheckbox.checked, group)" />
+          </div>
+          <div class="column w3-padding-small">
+            <p style="font-weight: bold;">{{ group }}</p>
+          </div>
+          <div class="column w3-padding-small" *ngIf="groupCount != null">
+            <span class="badge badge-light">{{ groupCount.get(group) }}</span>
+          </div>
+          <div class="column w3-padding-small">
+            <button class="close" (click)="removeGroup(group)">X</button>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="column w3-padding-large" *ngIf="selectedGroups?.length == 1">
+    <h4>{{ newUserTitle }}</h4>
+    <div class="input-group">
+      <h4>@</h4>
+      <input #newUser placeholder="ZacEfron" (keyup.enter)="addUser(newUser.value)"
+        (blur)="addUser(newUser.value); newUser.value='' ">
+      <button class="btn btn-primary" (click)="addUser(newUser.value)">Add</button>
+    </div>
+  </div>
+
 </div>
+
 <ol class="ol">
   <li class="li" *ngFor="let user of users">
     <div class="w3-border w3-round-xlarge w3-pale-blue w3-padding-small">
-      <button class="close" (click)="removeUser(user)">X</button>
+      <button class="close" (click)="removeUser(user)" *ngIf="selectedGroups?.length == 1">X</button>
       <app-user [user]="user">
       </app-user>
     </div>
