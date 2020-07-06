@@ -46,9 +46,18 @@
       </div>
     </div>
     <div>
-      <button type="submit" (click)="client.login()" class="btn btn-outline-dark btn-light">
+      <button type="submit" (click)="client.loginGoogle()" class="btn btn-outline-dark btn-light">
         <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
         Google Login</button>
+    </div>
+    <div>
+      <button type="submit" (click)="client.loginFacebook()" class="btn btn-outline-dark buttonFacebook svg-icon iconFacebook">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="facebook sign-in" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" />
+        Facebook Login</button>
+    </div>
+    <div>
+      <button type="submit" (click)="client.loginEmailPassword()" class="btn btn-outline-dark">
+        Username / Email Login</button>
     </div>
   </div>
 </div>
