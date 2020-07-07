@@ -90,6 +90,32 @@ export class ClientService {
     });
   }
 
+  loginTwitter() {
+    let login = this.auth.auth.signInWithPopup(new auth.TwitterAuthProvider()).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.displayName
+      };
+
+      console.log(user.toJSON());
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
+
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
+  }
+
   loginEmailPassword() {
     // let login = this.auth.auth.signInWithEmailAndPassword().then(function (result) {
     //   // The signed-in user info.
@@ -118,8 +144,8 @@ export class ClientService {
     this.auth.auth.signOut();
   }
 
-  getEmail() {
-    return this.auth.auth.currentUser.email;
+  getUser() {
+    return this.auth.auth.currentUser.displayName;
   }
 
 }

@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl(page)
   }
 
-  getEmail() {
-    return this.auth.auth.currentUser.email;
+  getUser() {
+    return this.auth.auth.currentUser.displayName;
   }
 
 }

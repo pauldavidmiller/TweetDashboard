@@ -36,7 +36,7 @@
 
     <div *ngIf="client.uid | async as uid">
       <!-- Client is logged in. {{ uid }} -->
-      Logged in as {{ getEmail() }}
+      Logged in as {{ getUser() }}
       <!-- <div *ngIf="client.isAdmin | async">The user also has ADMIN power</div> -->
       <div><button (click)="client.logout()" class="btn btn-primary">Logout</button></div>
       <div>
@@ -54,6 +54,11 @@
       <button type="submit" (click)="client.loginFacebook()" class="btn btn-outline-dark buttonFacebook svg-icon iconFacebook">
         <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="facebook sign-in" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" />
         Facebook Login</button>
+    </div>
+    <div>
+      <button type="submit" (click)="client.loginTwitter()" class="btn btn-outline-dark buttonTwitter svg-icon iconTwitter">
+        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="twitter sign-in" src="https://upload.wikimedia.org/wikipedia/sco/9/9f/Twitter_bird_logo_2012.svg"/>
+        Twitter Login</button>
     </div>
     <div>
       <button type="submit" (click)="client.loginEmailPassword()" class="btn btn-outline-dark">
