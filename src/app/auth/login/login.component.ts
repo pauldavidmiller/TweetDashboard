@@ -31,7 +31,13 @@ export class LoginComponent implements OnInit {
   }
 
   getUser() {
-    return this.auth.auth.currentUser.displayName;
+    if (this.auth.auth.currentUser.displayName){
+      return this.auth.auth.currentUser.displayName;
+    }
+    if (this.auth.auth.currentUser.email){
+      return this.auth.auth.currentUser.email;
+    }
+  
+    return this.auth.auth.currentUser.uid;
   }
-
 }

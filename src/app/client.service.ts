@@ -6,7 +6,6 @@ import { auth } from "firebase";
 import { AngularFireDatabase } from 'angularfire2/database';
 //import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestoreCollectionGroup } from "angularfire2/firestore";
 import * as firebase from 'firebase';
-import { LoginComponent } from './auth/login/login.component';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +31,6 @@ export class ClientService {
       }
     })
   );
-
 
   database = firebase.database();
 
@@ -95,7 +93,7 @@ export class ClientService {
       // The signed-in user info.
       let user = result.user;
       var postData = {
-        email: user.displayName
+        email: user.uid
       };
 
       console.log(user.toJSON());
@@ -116,28 +114,56 @@ export class ClientService {
     });
   }
 
-  loginEmailPassword() {
-    // let login = this.auth.auth.signInWithEmailAndPassword().then(function (result) {
-    //   // The signed-in user info.
-    //   let user = result.user;
-    //   var postData = {
-    //     email: user.email
-    //   };
+  loginEmailPassword(email: string, password: string) {
+    let login = this.auth.auth.signInWithEmailAndPassword(email, password).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.email
+      };
 
-    //   // UPDATE WITH KEY
-    //   // https://firebase.google.com/docs/database/web/read-and-write
-    //   let info = firebase.database().ref('clients/' + user.uid).update(postData);
-    //   console.log(info);
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
 
-    // }).catch(function (error) {
-    //   // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    //   // The email of the user's account used.
-    //   var email = error.email;
-    //   // The firebase.auth.AuthCredential type that was used.
-    //   var credential = error.credential;
-    // });
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
+  }
+
+  createEmailPassword(email: string, password: string){
+    console.log(email);
+    console.log(password);
+    let signup = this.auth.auth.createUserWithEmailAndPassword(email, password).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.email
+      };
+
+      console.log(user.toJSON());
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage)
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
   }
 
   logout() {
