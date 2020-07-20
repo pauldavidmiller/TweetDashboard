@@ -32,31 +32,22 @@ export class ClientService {
     })
   );
 
-
   database = firebase.database();
-  clientEmail: string;
 
   constructor(private auth: AngularFireAuth, public db: AngularFireDatabase) {
     //let n = this.db.list('clients').valueChanges();
   }
 
-  login() {
+  loginGoogle() {
     let login = this.auth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(function (result) {
       // The signed-in user info.
       let user = result.user;
-      console.log(user.email);
-      console.log(user.uid);
-
       var postData = {
         email: user.email
       };
 
-
       // UPDATE WITH KEY
       // https://firebase.google.com/docs/database/web/read-and-write
-      //var newPostKey = firebase.database().ref().child('clients').push().key;
-      //var updates = {};
-      //updates['/clients/' + user.uid + '/'] = postData;
       let info = firebase.database().ref('clients/' + user.uid).update(postData);
       console.log(info);
 
@@ -70,12 +61,117 @@ export class ClientService {
       var credential = error.credential;
     });
 
-
     //this.auth.auth.signInWithEmailAndPassword()
+  }
+
+  loginFacebook() {
+    let login = this.auth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.displayName
+      };
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
+
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
+  }
+
+  loginTwitter() {
+    let login = this.auth.auth.signInWithPopup(new auth.TwitterAuthProvider()).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.uid
+      };
+
+      console.log(user.toJSON());
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
+
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
+  }
+
+  loginEmailPassword(email: string, password: string) {
+    let login = this.auth.auth.signInWithEmailAndPassword(email, password).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.email
+      };
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
+
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
+  }
+
+  createEmailPassword(email: string, password: string){
+    console.log(email);
+    console.log(password);
+    let signup = this.auth.auth.createUserWithEmailAndPassword(email, password).then(function (result) {
+      // The signed-in user info.
+      let user = result.user;
+      var postData = {
+        email: user.email
+      };
+
+      console.log(user.toJSON());
+
+      // UPDATE WITH KEY
+      // https://firebase.google.com/docs/database/web/read-and-write
+      let info = firebase.database().ref('clients/' + user.uid).update(postData);
+      console.log(info);
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage)
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+    });
   }
 
   logout() {
     this.auth.auth.signOut();
+  }
+
+  getUser() {
+    return this.auth.auth.currentUser.displayName;
   }
 
 }

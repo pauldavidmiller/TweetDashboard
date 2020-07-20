@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ClientService } from './client.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'TweetDashboard';
 
-  constructor(public client: ClientService, private router: Router) {
+  constructor(public client: ClientService, private router: Router, private auth: AngularFireAuth) {
     
   }
 
